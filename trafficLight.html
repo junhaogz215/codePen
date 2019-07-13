@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>单标签、纯css实现红绿灯动画</title>
+  <style>
+    body {
+      margin: 0;
+      /* 绝对定位使height: 100%生效 */
+      position: absolute; 
+      height: 100%;
+      width: 100%;
+    }
+    /* 背景图 使用margin auto实现垂直水平居中 */
+    .wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 500px;
+      height: 350px;
+      background: rgb(97, 170, 189);
+    }
+    /* 灯框架 */
+    .traffic-light {
+      /* 居中代码 */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      text-align: center;
+
+      /* 绘制图案 */
+      width: 300px;
+      height: 90px;
+      background: #282f2f;
+      border-radius: 50px;
+      box-shadow: 0 0 0 2px #eee inset;
+    }
+    .traffic-light::after {
+      /* 居中代码 */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      content: '';
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgb(231, 183, 78);
+
+      box-shadow: -85px 0 0 0 rgb(247, 78, 26),  /* 红灯 */
+                  85px 0 0 0 rgb(38, 175, 84), /* 绿灯 */
+                  -85px 0 15px 0 rgb(247, 78, 26), /* 红灯光影 */
+                  0px 0 15px 0 rgb(231, 183, 78), /* 黄灯光影 */
+                  85px 0 15px 0 rgb(38, 175, 84); /* 绿灯光影 */
+
+      animation: traffic-light 5s linear 0s infinite;
+    }
+    
+    @keyframes traffic-light {
+      from {
+        background: transparent;
+
+        box-shadow: 
+          -85px 0 0 0 transparent,  /* 红灯 */
+          85px 0 0 0 transparent, /* 绿灯 */
+          -85px 0 15px 0 transparent, /* 红灯光影 */
+          0px 0 15px 0 transparent, /* 黄灯光影 */
+          85px 0 15px 0 transparent; /* 绿灯光影 */
+      }
+      25% {
+        background: transparent;
+
+        box-shadow: 
+          -85px 0 0 0 rgb(247, 78, 26),  /* 红灯 */
+          85px 0 0 0 transparent, /* 绿灯 */
+          -85px 0 15px 0 rgb(247, 78, 26), /* 红灯光影 */
+          0px 0 15px 0 transparent, /* 黄灯光影 */
+          85px 0 15px 0 transparent; /* 绿灯光影 */
+      }
+      50% {
+        background: rgb(231, 183, 78);
+
+        box-shadow: 
+          -85px 0 0 0 transparent,  /* 红灯 */
+          85px 0 0 0 transparent, /* 绿灯 */
+          -85px 0 15px 0 transparent, /* 红灯光影 */
+          0px 0 15px 0 rgb(231, 183, 78), /* 黄灯光影 */
+          85px 0 15px 0 transparent; /* 绿灯光影 */
+      }
+      75% {
+        background: transparent;
+
+        box-shadow: 
+          -85px 0 0 0 transparent,  /* 红灯 */
+          85px 0 0 0 rgb(38, 175, 84), /* 绿灯 */
+          -85px 0 15px 0 transparent, /* 红灯光影 */
+          0px 0 15px 0 transparent, /* 黄灯光影 */
+          85px 0 15px 0 rgb(38, 175, 84); /* 绿灯光影 */
+      }
+      to {
+        background: transparent;
+
+        box-shadow: 
+          -85px 0 0 0 transparent,  /* 红灯 */
+          85px 0 0 0 transparent, /* 绿灯 */
+          -85px 0 15px 0 transparent, /* 红灯光影 */
+          0px 0 15px 0 transparent, /* 黄灯光影 */
+          85px 0 15px 0 transparent; /* 绿灯光影 */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="traffic-light"></div>
+  </div>
+</body>
+</html>
